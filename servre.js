@@ -12,9 +12,9 @@ const PhonebookModel = mongoose.model('phonebook', schemaPhonenumber);
 const maxPhonenumber = new PhonebookModel
 (
     {
-        name : 'jak',
-        phoneNumber : 12345,
-        email : 'max@gamil.com'
+        name : 'ali',
+        phoneNumber : 96345,
+        email : 'ali@gamil.com'
     }
 );
 async function createNumber()
@@ -39,7 +39,17 @@ async function getPhonenumberList()
     // const phoneNumberList = await PhonebookModel.find({ phoneNumber:{ $ne : 12345  } });
     // const phoneNumberList = await PhonebookModel.find({ phoneNumber:{ $nin : [ 12345 ] } });
     // const phoneNumberList = await  PhonebookModel.find().or([ { name:'jak' }, { phoneNumber : { $lt :20000 } } ]);  
-    const phoneNumberList = await  PhonebookModel.find().and([ { name:'jak' }, { phoneNumber : { $lt :20000 } } ]);    
+    // const phoneNumberList = await  PhonebookModel.find().and([ { name:'jak' }, { phoneNumber : { $lt :20000 } } ]);
+    
+    // rejaks sintaks
+    // First word have 'm' 
+    // const phoneNumberList = await  PhonebookModel.find({ name:/^m/ }); 
+    // last word have 'k' 
+    // const phoneNumberList = await  PhonebookModel.find({ name:/k$/ }); 
+    // Word included 'f'
+    // const phoneNumberList = await  PhonebookModel.find({ name:/.*f.*/ }); 
+    // count fild with a
+    const phoneNumberList = await  PhonebookModel.find({ name:/.*a.*/ }).count(); 
     // const phoneNumberList = await PhonebookModel.find().limit(1);
     // const phoneNumberList = await PhonebookModel.find().sort({ name:-1 });
     // const phoneNumberList = await PhonebookModel.find().sort({ name:-1 }).select({ 
@@ -49,6 +59,14 @@ async function getPhonenumberList()
     console.clear();
     console.log(phoneNumberList);
 }
-
+async function pagination()
+{
+    const pageSize = 4;
+    const pageNumber = 2;
+    const phoneNumberList = await  PhonebookModel.find().skip((pageNumber-1)*pageSize).limit(pageSize); 
+    console.clear();
+    console.log(phoneNumberList);
+}
 // createNumber();
-getPhonenumberList();
+// getPhonenumberList();
+pagination();
