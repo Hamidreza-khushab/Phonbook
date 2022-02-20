@@ -82,9 +82,15 @@ async function modifyMetodTow(id, name)
     console.clear();
     console.log(phoneNumberModify);
 }
-
+async function deleted(id)
+{
+    const phoneNumberDeleted = await  PhonebookModel.findByIdAndDelete(id); 
+    console.clear();
+    console.log(phoneNumberDeleted);
+}
 // createNumber();
 // getPhonenumberList();
 // pagination();
 // modifyMetodOne('6212187ad467c8092aea1ee7', 'Hamid');
 // modifyMetodTow('6212187ad467c8092aea1ee7', 'Hamed');
+deleted('6212187ad467c8092aea1ee7');
