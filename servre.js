@@ -19,8 +19,16 @@ const maxPhonenumber = new PhonebookModel
 );
 async function createNumber()
 {
-    const savedNumber = await maxPhonenumber.save();
-    console.log('Number Saved', savedNumber );
+    try 
+    {
+        const savedNumber = await maxPhonenumber.save();
+        console.log('Number Saved', savedNumber );   
+    } 
+    catch (error) 
+    {
+        console.log(error.message);
+    }
+    
 }
 // Filter parameters
 // eq => equal to
@@ -88,9 +96,9 @@ async function deleted(id)
     console.clear();
     console.log(phoneNumberDeleted);
 }
-// createNumber();
+createNumber();
 // getPhonenumberList();
 // pagination();
 // modifyMetodOne('6212187ad467c8092aea1ee7', 'Hamid');
 // modifyMetodTow('6212187ad467c8092aea1ee7', 'Hamed');
-deleted('6212187ad467c8092aea1ee7');
+// deleted('6212187ad467c8092aea1ee7');
