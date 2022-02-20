@@ -61,12 +61,30 @@ async function getPhonenumberList()
 }
 async function pagination()
 {
+    const pageNumber =1;
     const pageSize = 4;
-    const pageNumber = 2;
     const phoneNumberList = await  PhonebookModel.find().skip((pageNumber-1)*pageSize).limit(pageSize); 
     console.clear();
     console.log(phoneNumberList);
 }
+async function modifyMetodOne(id, name)
+{
+    const phoneNumber = await  PhonebookModel.findById(id); 
+    if (!phoneNumber) return;
+    phoneNumber.name = name;
+    const phoneNumberModify = await phoneNumber.save();
+    console.clear();
+    console.log(phoneNumberModify);
+}
+async function modifyMetodTow(id, name)
+{
+    const phoneNumberModify = await  PhonebookModel.update({ _id:id }, { $set : { name } }); 
+    console.clear();
+    console.log(phoneNumberModify);
+}
+
 // createNumber();
 // getPhonenumberList();
-pagination();
+// pagination();
+// modifyMetodOne('6212187ad467c8092aea1ee7', 'Hamid');
+// modifyMetodTow('6212187ad467c8092aea1ee7', 'Hamed');
